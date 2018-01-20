@@ -1,5 +1,5 @@
 exports.seed = function (knex, Promise) {
-  let tableOrder = ['users', 'templates']
+  let tableOrder = ['templates', 'users']
 
   let promiseList = tableOrder.map(table => {
     return knex(table).del()
@@ -12,4 +12,4 @@ exports.seed = function (knex, Promise) {
     .catch(error => {
       console.log('ERROR: ', error)
     })
-};
+}
