@@ -7,4 +7,4 @@ router.post('/login', AuthController.verifyToken, AuthController.prune(Keys.logi
 router.get('/current', AuthController.verifyToken, AuthController.currentUser)
 router.post('/signup', AuthController.verifyToken, AuthController.prune(Keys.postPrune('users')), AuthController.complete(Keys.postComplete('users')), AuthController.checkExistence, UsersController.create)
 
-module.exports = router;
+module.exports = router

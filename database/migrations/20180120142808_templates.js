@@ -6,6 +6,7 @@ exports.up = function (knex, Promise) {
         table.boolean('public').defaultsTo(true)
         table.string('name').notNullable().defaultsTo('Unnamed Template')
         table.text('md_description').defaultsTo('')
+        table.boolean('completed').defaultsTo(true)
         table.timestamps(true, true)
 
         table.foreign('owner_id').references('users.id').onDelete('CASCADE')

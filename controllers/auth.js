@@ -40,7 +40,7 @@ class AuthController extends Controller {
     }
 
     static verifyToken(req, res, next) {
-        let [bearer, token] = req.headers.auth ? req.headers.auth.split(' ') : [null, null]
+        let [bearer, token] = req.headers.authorization ? req.headers.authorization.split(' ') : [null, null]
         jwt.verify(token, process.env.TOKEN_SECRET, (err, vToken) => {
             if (err) {
                 console.log('ERROR: ', err.message)
