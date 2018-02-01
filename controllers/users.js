@@ -1,7 +1,9 @@
 const Controller = require('./controller.js')('users')
 const Model = require(`../models/users.js`)
+const TemplateModel = require('../models/users.js')
 const encryption = require('../encryption.js')
 const jwt = require('jsonwebtoken')
+
 
 class UsersController extends Controller {
     static create(req, res, next) {
@@ -9,6 +11,15 @@ class UsersController extends Controller {
             req.body.password = hashedPass
             console.log(req.body.password);
             super.create(req, res, next)
+        })
+    }
+
+    static getTemplatesByUser(req, res, next) {
+        Model.allMatchingFrom('templates','owner_id', req.params.id).then(templates => {
+            res.json({
+                userType: res.userType,
+                templates: templates
+            })
         })
     }
 

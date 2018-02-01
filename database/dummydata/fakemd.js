@@ -1,4 +1,4 @@
-let qgen = JSON.stringify(`![qgen logo](https://cdn.rawgit.com/alarisprime/qgen/master/media/qgen-logo.svg)
+let qgen = `![qgen logo](https://cdn.rawgit.com/alarisprime/qgen/master/media/qgen-logo.svg)
 
 [![Build Status](https://travis-ci.org/alarisprime/qgen.svg?branch=master)](https://travis-ci.org/alarisprime/qgen) [![Greenkeeper badge](https://badges.greenkeeper.io/alarisprime/qgen.svg)](https://greenkeeper.io/)
 
@@ -157,6 +157,6 @@ $ qgen blog.md --filename=\`date "+%Y-%m-%d"\`
 
 ## License
 
-MIT © [Alaris Prime](https://alarisprime.com/), LLC`)
+MIT © [Alaris Prime](https://alarisprime.com/), LLC`
 
 module.exports = qgen

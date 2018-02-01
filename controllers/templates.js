@@ -10,14 +10,29 @@ class TemplatesController extends Controller {
     }
 
     static sendZip (req, res, next) {
-        Model.generateZip(req.params.id)
-            .then(zipObject => {
-                res.set('Content-disposition', 'attachment; filename=test.zip')
-                res.set('Content-Type', 'application/zip')
+        Model.getTemplateObject(req.params.id)
+        .then(template => {
+            return Model.generateZip(template)
+        })
+        .then(zipObject => {
+            res.set('Content-disposition', 'attachment; filename=test.zip')
+            res.set('Content-Type', 'application/zip')
 
-                let stream = zipObject.generateNodeStream().pipe(res).on('end', res.end)
-            })
+            zipObject.generateNodeStream().pipe(res).on('end', res.end)
+        })
     }
-}
+
+    static verifyOwnership (req, res, next) {
+        Model.getOwnerId(req.params.id).then(ownerId => {
+            console.log(typeof req.token.id)
+            console.log(typeof ownerId)
+            if (ownerId != req.token.id) {
+                return next({ status: 403, message: 'Current user is not the owner of the requested resource' })
+            } else {
+                return next()
+            }
+        })
+    }
+} 
 
 module.exports = TemplatesController
