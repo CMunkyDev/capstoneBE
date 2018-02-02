@@ -11,21 +11,20 @@ class TemplatesController extends Controller {
     }
 
     static sendZip (req, res, next) {
-        Model.generateZip(req.body)
-        .then(zipObject => {
-            res.set('Content-disposition', 'attachment; filename=snapi.zip')
-            res.set('Content-Type', 'application/zip')
+        console.log('sz:', req.body)
+        let zipObject = Model.generateZip(req.body.template_object)
+        res.set('Content-disposition', 'attachment; filename=snapi.zip')
+        res.set('Content-Type', 'application/zip')
 
-            zipObject.generateNodeStream().pipe(res).on('end', res.end)
-        })
+        zipObject.generateNodeStream().pipe(res).on('end', res.end)
     }
 
     static sendZipFromDb (req, res, next) {
+        console.log('szfdb:', req.params.id)
         Model.getTemplateObject(req.params.id)
         .then(template => {
-            return Model.generateZip(template)
-        })
-        .then(zipObject => {
+            let zipObject = Model.generateZip(template.template_object)
+
             res.set('Content-disposition', 'attachment; filename=snapi.zip')
             res.set('Content-Type', 'application/zip')
 

@@ -12,7 +12,7 @@ class Templates extends Model {
     }
 
     static generateZip (templateObject) {
-        let zipObject = frankenserver(template.template_object)
+        return frankenserver(templateObject)
         return zipObject
     }
 
