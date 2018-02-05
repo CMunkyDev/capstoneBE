@@ -26,6 +26,7 @@ module.exports = (tableName) => {
         static allMatchingFrom(tableName, key, value) {
             return db(tableName).where({ [key]: value })
         }
+
     }
 
     return Model
