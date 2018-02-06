@@ -11,7 +11,6 @@ class TemplatesController extends Controller {
     }
 
     static sendZip (req, res, next) {
-        console.log('sz:', req.body)
         let zipObject = Model.generateZip(req.body.template_object)
         res.set('Content-disposition', 'attachment; filename=snapi.zip')
         res.set('Content-Type', 'application/zip')
@@ -20,7 +19,6 @@ class TemplatesController extends Controller {
     }
 
     static sendZipFromDb (req, res, next) {
-        console.log('szfdb:', req.params.id)
         Model.getTemplateObject(req.params.id)
         .then(template => {
             let zipObject = Model.generateZip(template.template_object)
@@ -34,8 +32,6 @@ class TemplatesController extends Controller {
 
     static verifyOwnership (req, res, next) {
         Model.getOwnerId(req.params.id).then(ownerId => {
-            console.log(typeof req.token.id)
-            console.log(typeof ownerId)
             if (ownerId != req.token.id) {
                 return next({ status: 403, message: 'Current user is not the owner of the requested resource' })
             } else {

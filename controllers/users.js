@@ -9,7 +9,6 @@ class UsersController extends Controller {
     static create(req, res, next) {
         encryption.promiseHash(req.body.password).then(hashedPass => {
             req.body.password = hashedPass
-            console.log(req.body.password);
             super.create(req, res, next)
         })
     }

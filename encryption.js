@@ -10,5 +10,3 @@ module.exports = {
         return bcrypt.compare(plainPass, hashedPass)
     }
 }
-
-//module.exports.promiseHash('password').then(console.log)
