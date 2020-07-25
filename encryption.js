@@ -1,10 +1,8 @@
-const bcrypt = require('bcrypt-as-promised')
+const bcrypt = require('bcrypt')
 
 module.exports = {
     promiseHash(password) {
-        return bcrypt.genSalt(10, 8).then(salt => {
-            return bcrypt.hash(password, salt)
-        })
+        return bcrypt.hash(password, 10)
     },
     promiseCompare(plainPass, hashedPass) {
         return bcrypt.compare(plainPass, hashedPass)
